@@ -55,4 +55,12 @@ public class Books {
 
     private LocalDateTime dateOfCreated;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY,
+            mappedBy = "books")
+    private List<Image> images = new ArrayList<>();
+
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

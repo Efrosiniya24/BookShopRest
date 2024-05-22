@@ -7,6 +7,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,7 +31,7 @@ public class BooksController {
         List<Books> allBooks = booksRepository.findAll();
         return objectMapper.writeValueAsString(allBooks);
     }
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/addBook")
     public void addBook(@RequestBody Books book){
         log.info("New row: " + booksRepository.save(book));
@@ -48,4 +52,11 @@ public class BooksController {
     public void deleteBook(@PathVariable Long id){
         booksRepository.deleteById(id);
     }
+
+    @GetMapping("/currentUser")
+    public String currentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getAuthorities().toString();
+    }
 }
+

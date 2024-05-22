@@ -14,7 +14,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -32,10 +31,11 @@ public class SecurityConfiguration {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeRequests(authorize -> authorize
-                        .requestMatchers("/api/v1/auth/**")
+                        .requestMatchers("/api/v1/auth/authenticate", "/BookShop/allBooks", "/BookShop/currentUser")
                         .permitAll()
-                        .anyRequest()
-                        .authenticated())
+//                        .requestMatchers("/BookShop/addBook")
+//                        .hasRole("ADMIN")
+                        .anyRequest().authenticated())
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
@@ -43,5 +43,4 @@ public class SecurityConfiguration {
 
         return http.build();
     }
-
 }

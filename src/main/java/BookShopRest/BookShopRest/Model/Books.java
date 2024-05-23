@@ -61,7 +61,6 @@ public class Books {
             mappedBy = "books")
     private List<Image> images = new ArrayList<>();
 
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

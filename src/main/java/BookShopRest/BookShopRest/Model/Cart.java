@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
@@ -26,6 +27,7 @@ public class Cart {
 
     @OneToOne(mappedBy = "cart", fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @EqualsAndHashCode.Exclude
     private User user;
 
     @ManyToMany
@@ -35,5 +37,4 @@ public class Cart {
             inverseJoinColumns = @JoinColumn(name = "book_id")
     )
     private Set<Books> books = new HashSet<>();
-
 }

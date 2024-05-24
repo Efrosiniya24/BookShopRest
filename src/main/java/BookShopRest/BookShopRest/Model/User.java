@@ -50,7 +50,6 @@ public class User implements UserDetails {
     }
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "cart_id")
     @EqualsAndHashCode.Exclude
     private Cart cart;
 

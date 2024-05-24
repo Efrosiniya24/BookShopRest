@@ -26,7 +26,6 @@ public class Cart {
     private double totalPrice;
 
     @OneToOne(mappedBy = "cart", fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
     @EqualsAndHashCode.Exclude
     private User user;
 

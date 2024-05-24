@@ -7,9 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -57,15 +55,10 @@ public class Books {
 
     private LocalDateTime dateOfCreated;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY,
-            mappedBy = "books")
-    private List<Image> images = new ArrayList<>();
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToMany(mappedBy = "books")
     private Set<Cart> carts = new HashSet<>();
-
 }

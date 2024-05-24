@@ -1,5 +1,7 @@
 package BookShopRest.BookShopRest.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -53,10 +55,12 @@ public class Books {
     @Column(name = "AgeRestriction")
     private String AgeRestriction;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime dateOfCreated;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 
     @ManyToMany(mappedBy = "books")

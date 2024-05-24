@@ -1,6 +1,7 @@
 package BookShopRest.BookShopRest.Model;
 
 import BookShopRest.BookShopRest.Model.Enum.Role;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -51,6 +52,7 @@ public class User implements UserDetails {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @EqualsAndHashCode.Exclude
+    @JsonManagedReference
     private Cart cart;
 
     @Override

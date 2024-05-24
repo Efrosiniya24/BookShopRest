@@ -59,4 +59,3 @@ public class BooksController {
         return authentication.getAuthorities().toString();
     }
 }
-

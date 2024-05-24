@@ -38,6 +38,11 @@ class CartServiceTest {
     @Mock
     private BooksRepository booksRepository;
 
+    @BeforeEach
+    void setUp() {
+        // Не нужно для JUnit5 с MockitoExtension
+    }
+
     @Test
     void addBookToCart_UserNotFound() {
         when(userRepository.findByEmail(anyString())).thenReturn(Optional.empty());
@@ -116,6 +121,7 @@ class CartServiceTest {
         Cart cart = new Cart();
         user.setCart(cart);
         Books book = new Books();
+        book.setPrice(29.99);
         cart.getBooks().add(book);
 
         when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(user));
